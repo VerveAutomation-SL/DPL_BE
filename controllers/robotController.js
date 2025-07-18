@@ -5,8 +5,11 @@ const axios = require('axios');
 
 exports.getTaskList = async (req, res) => {
   try {
-    const {ROBOT_BASE_URL} = req.body
-    const response = await axios.get(`${ROBOT_BASE_URL}/task_list`);
+    const { ROBOT_BASE_URL } = req.body;
+    const fullUrl = `${ROBOT_BASE_URL}/task_list`;
+    console.log("Calling robot URL:", fullUrl); // ✅ Check this in server logs
+
+    const response = await axios.get(fullUrl);
     res.json(response.data);
   } catch (error) {
     console.error("Failed to fetch tasks:", error.message);
