@@ -23,7 +23,6 @@ exports.createBaseIP = async (req, res) => {
   }
 };
 
-
 // Get all BaseIPs
 exports.getAllBaseIPs = async (req, res) => {
   try {

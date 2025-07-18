@@ -11,6 +11,7 @@ app.use(cors());
 // Routes
 app.use("/api/auth", require("./routes/adminRoutes"));
 app.use('/api/baseip', require("./routes/base_IPRoutes"));
+app.use('/api/robot', require("./routes/robotRoutes"));
 
 
 const PORT = process.env.PORT || 3000;
