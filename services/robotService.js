@@ -1,4 +1,4 @@
-const { controlClient, statusClient } = require('./tcpClientService');
+const { controlClient, statusClient, naviClient, otherClient, ConfigurationClient  } = require('./tcpClientService');
 
 /*
 Example API numbers - adjust if your robot doc uses different:
@@ -11,13 +11,30 @@ const API = {
   RELOCATION: 2002,
   BATTERY_REQ: 1007,
   LOCATION_REQ: 1004,
-  NAV_STATUS_REQ: 1020
+  NAV_STATUS_REQ: 1020,
+  RUN_TASK: 3106,
+  EStop: 6004,
+  MAP_LIST_REQ: 1300,
+  PULL_MAP_REQ: 4011
 };
 
 async function moveOpenLoop({ vx = 0, vy = 0, w = 0, duration = 2000 }) {
   const body = { vx, vy, w, duration };
   const res = await controlClient.sendRequest(API.OPEN_LOOP_MOTION, body, 3000);
   console.log("Body:", body)
+  return res.json || res;
+}
+
+async function RunTask(taskName) {
+  const body = taskName
+  const res = await naviClient.sendRequest(API.RUN_TASK, body, 3000);
+  console.log("Body:", body)
+  return res.json || res;
+}
+
+async function Estop(Estop) {
+  const body = {"status": Estop}
+  const res = await otherClient.sendRequest(API.EStop, body, 3000);
   return res.json || res;
 }
 
@@ -42,4 +59,19 @@ async function getNavStatus(simple = true) {
   return res.json || res;
 }
 
-module.exports = { moveOpenLoop, stopMotion, getBattery, getLocation, getNavStatus };
+async function getMapList() {
+  const res = await statusClient.sendRequest(API.MAP_LIST_REQ, null, 3000);
+  console.log("Map List Response:", res);
+  return res.json || res;
+}
+
+// Pull map data (JSON format)
+async function pullMap(mapName = "default") {
+  const body = { map_name: mapName };
+  const res = await ConfigurationClient.sendRequest(API.PULL_MAP_REQ, body, 8000);
+  console.log("Pull Map Request Body:", body);
+  return res.json || res;
+}
+
+
+module.exports = { moveOpenLoop, stopMotion, getBattery, getLocation, getNavStatus, RunTask, Estop, getMapList, pullMap};

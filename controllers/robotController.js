@@ -47,4 +47,28 @@ async function getNavStatus(req, res) {
   }
 }
 
-module.exports = { postMove, postStop, getBattery, getLocation, getNavStatus };
+async function RunTask(req, res) {
+  try {
+    const { name } = req.body; // destructuring 'name' directly
+    const r = await robotService.RunTask({ name: name });
+    return res.json({ ok: true, result: r });
+  } catch (err) {
+    console.error("RunTask error", err);
+    return res.status(500).json({ ok: false, error: err.message });
+  }
+}
+
+async function Estop(req, res) {
+  try{
+    const Estop = req.body;
+    const r = await robotService.Estop({Estop})
+    return res.json({ ok: true, result: r });
+  }
+  catch (err) {
+    console.error("postMove error", err);
+    return res.status(500).json({ ok: false, error: err.message });
+  }
+}
+
+
+module.exports = { postMove, postStop, getBattery, getLocation, getNavStatus, RunTask, Estop};

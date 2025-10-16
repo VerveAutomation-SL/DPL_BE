@@ -86,5 +86,8 @@ class TCPClient extends EventEmitter {
 
 const controlClient = new TCPClient(config.robot.ip, config.robot.controlPort, 'control');
 const statusClient = new TCPClient(config.robot.ip, config.robot.statusPort, 'status');
+const naviClient = new TCPClient(config.robot.ip, config.robot.naviPort, 'navi');
+const otherClient = new TCPClient(config.robot.ip, config.robot.otherPort, 'other');
+const ConfigurationClient = new TCPClient(config.robot.ip, config.robot.ConfigurationPort, 'Configuration');
 
-module.exports = { controlClient, statusClient };
+module.exports = { controlClient, statusClient,naviClient, otherClient, ConfigurationClient };
