@@ -9,7 +9,7 @@ Example API numbers - adjust if your robot doc uses different:
 const API = {
   OPEN_LOOP_MOTION: 2010,
   RELOCATION: 2002,
-  BATTERY_REQ: 1007,
+  BATTERY_REQ: 1102,
   LOCATION_REQ: 1004,
   NAV_STATUS_REQ: 1020,
   RUN_TASK: 3106,
