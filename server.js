@@ -24,12 +24,12 @@ const wss = startWSServer(server);
 
 // Start the one and only server
 server.listen(config.server.port, () => {
-  const port = config.server.port;
-  console.log(`Backend listening on port ${port}`);
-  console.log(`Server running on port ${port}`);
+    const port = config.server.port;
+    console.log(`Backend listening on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
-// sequelize
-//   .sync({ alter: true }) // Updates tables without dropping data
-//   .then(() => console.log("✅ Database & tables synced successfully!"))
-//   .catch((err) => console.error("❌ Error syncing database:", err));
+sequelize
+    .sync({ alter: true }) // Updates tables without dropping data
+    .then(() => console.log("✅ Database & tables synced successfully!"))
+    .catch((err) => console.error("❌ Error syncing database:", err));
