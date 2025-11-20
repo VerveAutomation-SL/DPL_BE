@@ -112,9 +112,9 @@ exports.controllerlogin = async (req, res) => {
       process.env.JWT_ACCESS_TOKEN_SECRET,
       { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION }
     );
-    res.json({
+    res.status(200).json({
       message: "Login successful", token,
-      controllerUser: {
+      user: {
         id: controllerUser.id,
         full_name: controllerUser.full_name,
         email: controllerUser.email,
